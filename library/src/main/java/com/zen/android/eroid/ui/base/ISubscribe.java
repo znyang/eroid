@@ -1,14 +1,14 @@
-package com.zen.android.eroid.ui.util;
+package com.zen.android.eroid.ui.base;
 
 import rx.Subscription;
 
 /**
- * ISubscribeHandle
+ * ISubscribe
  *
  * @author zeny
  * @version 2015.10.24
  */
-public interface ISubscribeHandle {
+public interface ISubscribe {
 
     void collect(Subscription obs);
 

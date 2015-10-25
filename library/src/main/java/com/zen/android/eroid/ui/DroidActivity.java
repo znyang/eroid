@@ -1,9 +1,11 @@
 package com.zen.android.eroid.ui;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import com.zen.android.eroid.ui.util.PageDelegate;
+import com.zen.android.eroid.inject.AppComponentManager;
+import com.zen.android.eroid.ui.page.DroidPageDelegate;
 
 import rx.Subscription;
 
@@ -13,23 +15,35 @@ import rx.Subscription;
  * @author zeny
  * @version 2015.10.24
  */
-public class DroidActivity extends AppCompatActivity{
+public class DroidActivity extends AppCompatActivity {
 
-    private PageDelegate mPageDelegate = new PageDelegate();
+    private DroidPageDelegate<DroidActivity> mDroidPageDelegate;
+
+    public DroidActivity() {
+        AppComponentManager.get().inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageDelegate.register(this);
+        getDroidPageDelegate().register(this);
+    }
+
+    @NonNull
+    public DroidPageDelegate<DroidActivity> getDroidPageDelegate() {
+        if (mDroidPageDelegate == null) {
+            mDroidPageDelegate = DroidPageDelegate.create(this);
+        }
+        return mDroidPageDelegate;
     }
 
     public void collect(Subscription obs) {
-        mPageDelegate.collect(obs);
+        getDroidPageDelegate().collect(obs);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPageDelegate.unsubscribe();
+        getDroidPageDelegate().unsubscribe();
     }
 }

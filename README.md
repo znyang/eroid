@@ -7,5 +7,11 @@
 * OkHttp
 * DBFlow
 * Glide
-* RxJava,RxAndroid,RxBinding
-*
+* RxJava/RxAndroid
+* EventBus/RxBus
+* ButterKnife
+
+## Other
+
+* RetroLambda
+* CheckStyle

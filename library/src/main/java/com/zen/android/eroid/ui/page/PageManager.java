@@ -1,4 +1,4 @@
-package com.zen.android.eroid.ui.util;
+package com.zen.android.eroid.ui.page;
 
 import android.app.Activity;
 
@@ -15,31 +15,34 @@ import rx.Observable;
  * @author zeny
  * @version 2015.10.24
  */
-public class PageManager {
+public final class PageManager {
 
     private static final PageManager INSTANCE = new PageManager();
+
+    private Set<WeakReference<Activity>> mReferences
+            = new LinkedHashSet<>();
+
+    private PageManager() {
+    }
 
     public static PageManager getInstance() {
         return INSTANCE;
     }
 
-    private Set<WeakReference<Activity>> collection
-            = new LinkedHashSet<>();
-
     public void add(Activity activity) {
-        collection.add(new WeakReference<>(activity));
+        mReferences.add(new WeakReference<>(activity));
     }
 
     public void clear() {
-        Observable.from(collection)
+        Observable.from(mReferences)
                 .filter(ref -> ref != null && ref.get() != null)
                 .map(Reference::get)
                 .subscribe(Activity::finish);
-        collection.clear();
+        mReferences.clear();
     }
 
     public void clearExcept(final Class<? extends Activity> clazz) {
-        Observable.from(collection)
+        Observable.from(mReferences)
                 .filter(ref -> {
                     if (ref == null) {
                         return false;

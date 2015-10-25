@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Process;
 
 import com.zen.android.eroid.base.ContextUtil;
-import com.zen.android.eroid.ui.util.PageManager;
+import com.zen.android.eroid.ui.page.PageManager;
 
 /**
  * DroidApp

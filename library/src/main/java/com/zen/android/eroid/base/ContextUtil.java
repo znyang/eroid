@@ -8,9 +8,12 @@ import android.content.Context;
  * @author zeny
  * @version 2015.10.24
  */
-public class ContextUtil {
+public final class ContextUtil {
 
     private static Context sAppContext;
+
+    private ContextUtil() {
+    }
 
     public static Context getAppContext() {
         return sAppContext;
