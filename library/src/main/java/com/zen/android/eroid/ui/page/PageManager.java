@@ -25,14 +25,27 @@ public final class PageManager {
     private PageManager() {
     }
 
+    /**
+     * get single PageManager instance
+     *
+     * @return
+     */
     public static PageManager getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * register activity to collection by weak reference
+     *
+     * @param activity
+     */
     public void add(Activity activity) {
         mReferences.add(new WeakReference<>(activity));
     }
 
+    /**
+     * clear all activity reference, execute finish()
+     */
     public void clear() {
         Observable.from(mReferences)
                 .filter(ref -> ref != null && ref.get() != null)
@@ -41,6 +54,11 @@ public final class PageManager {
         mReferences.clear();
     }
 
+    /**
+     * finish all Activity if exist. except clazz
+     *
+     * @param clazz
+     */
     public void clearExcept(final Class<? extends Activity> clazz) {
         Observable.from(mReferences)
                 .filter(ref -> {

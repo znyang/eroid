@@ -5,14 +5,14 @@ apply from: "${rootDir}/config/retrolambda.gradle"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':library')
     testCompile parent.testLibs.junit
 
     apt parent.libs.daggerCompiler
     compile parent.libs.dagger
     compile parent.libs.appCompat
+    compile parent.libs.okHttp
+    compile parent.libs.rxJava
     compile parent.libs.rxAndroid
-    compile parent.libs.retrofit
-    compile parent.libs.jacksonDatabind
-
-    provided parent.libs.supportAnnotation
+    compile parent.libs.retrofitWithJackson
 }
