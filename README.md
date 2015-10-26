@@ -15,3 +15,4 @@
 
 * RetroLambda
 * CheckStyle
+* Proguard
