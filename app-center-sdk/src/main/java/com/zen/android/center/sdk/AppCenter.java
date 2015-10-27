@@ -14,7 +14,7 @@ import javax.inject.Inject;
 public class AppCenter {
 
     @Inject
-    private ClientApi mApi;
+    ClientApi mApi;
 
     public AppCenter() {
         CenterComponent.Instance.get().inject(this);
