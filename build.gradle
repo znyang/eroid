@@ -1,5 +1,5 @@
 apply from: "${rootDir}/config/dependencies.gradle"
-apply from: "${rootDir}/config/checkstyle/checkstyle.gradle"
+//apply from: "${rootDir}/config/checkstyle/checkstyle.gradle"
 
 buildscript {
     repositories {
