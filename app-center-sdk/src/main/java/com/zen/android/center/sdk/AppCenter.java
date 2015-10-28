@@ -1,6 +1,7 @@
 package com.zen.android.center.sdk;
 
 import com.zen.android.center.sdk.inject.component.CenterComponent;
+import com.zen.android.center.sdk.inject.component.DaggerProCenterComponent;
 import com.zen.android.center.sdk.protocol.ClientApi;
 
 import javax.inject.Inject;
@@ -18,6 +19,10 @@ public class AppCenter {
 
     public AppCenter() {
         CenterComponent.Instance.get().inject(this);
+    }
+
+    public static void init() {
+        CenterComponent.Instance.init(DaggerProCenterComponent.builder().build());
     }
 
     public static ClientApi client() {
