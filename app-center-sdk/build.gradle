@@ -7,6 +7,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
     testCompile parent.testLibs.junit
+    testCompile parent.testLibs.robolectric
 
     apt parent.libs.daggerCompiler
     compile parent.libs.dagger
