@@ -34,6 +34,8 @@ import java.util.List;
 
 import com.zen.android.eroid.sample.R;
 
+import butterknife.InjectView;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -59,9 +61,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     private              UserLoginTask mAuthTask         = null;
 
     // UI references.
+    @InjectView(R.id.email)
     private AutoCompleteTextView mEmailView;
+    @InjectView(R.id.password)
     private EditText             mPasswordView;
+    @InjectView(R.id.login_progress)
     private View                 mProgressView;
+    @InjectView(R.id.login_form)
     private View                 mLoginFormView;
 
     @Override
@@ -69,10 +75,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
             if (id == R.id.login || id == EditorInfo.IME_NULL) {
                 attemptLogin();
@@ -83,9 +87,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {
