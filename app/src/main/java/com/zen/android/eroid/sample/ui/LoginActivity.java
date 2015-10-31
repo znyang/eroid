@@ -62,13 +62,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     // UI references.
     @InjectView(R.id.email)
-    private AutoCompleteTextView mEmailView;
+    AutoCompleteTextView mEmailView;
     @InjectView(R.id.password)
-    private EditText             mPasswordView;
+    EditText             mPasswordView;
     @InjectView(R.id.login_progress)
-    private View                 mProgressView;
+    View                 mProgressView;
     @InjectView(R.id.login_form)
-    private View                 mLoginFormView;
+    View                 mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
