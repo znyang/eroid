@@ -5,6 +5,8 @@ import com.zen.android.center.sdk.model.UserSession;
 import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.center.sdk.protocol.entry.UserEntry;
 
+import org.mockito.Mockito;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -29,13 +31,17 @@ public class TestDataClientModule {
 
             @Override
             public Observable<UserSession> register(@Body UserEntry userEntry) {
-                return Observable.just(new UserSession());
+                UserSession session = Mockito.mock(UserSession.class);
+                Mockito.when(session.getSessionToken()).thenReturn("register-token");
+                return Observable.just(session);
             }
 
             @Override
             public Observable<LoginSession> login(@Query(FIELD_USERNAME) String username,
                                                   @Query(FIELD_PASSWORD) String password) {
-                return Observable.just(new LoginSession());
+                LoginSession session = Mockito.mock(LoginSession.class);
+                Mockito.when(session.getSessionToken()).thenReturn("login-token");
+                return Observable.just(session);
             }
         };
     }
