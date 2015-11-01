@@ -1,6 +1,6 @@
-package com.zen.android.center.sdk.inject;
+package com.zen.android.center.sdk.injection;
 
-import com.zen.android.center.sdk.inject.component.CenterComponent;
+import com.zen.android.center.sdk.injection.component.CenterComponent;
 
 import javax.inject.Singleton;
 

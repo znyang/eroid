@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 /**
- * IProDroidAppComponent
+ * IProDroidComponent
  *
  * @author zeny
  * @version 2015.10.25
@@ -16,5 +16,5 @@ import dagger.Component;
 @Component(modules = {
         DroidAppModule.class
 })
-public interface IProDroidAppComponent extends IDroidAppComponent {
+public interface IProDroidComponent extends IDroidComponent {
 }

@@ -1,4 +1,4 @@
-package com.zen.android.center.sdk.inject.component;
+package com.zen.android.center.sdk.injection.component;
 
 import com.zen.android.center.sdk.AppCenter;
 

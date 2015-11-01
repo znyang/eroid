@@ -1,4 +1,4 @@
-package com.zen.android.center.sdk.inject.module;
+package com.zen.android.center.sdk.injection.module;
 
 import android.util.Log;
 
@@ -19,7 +19,6 @@ import dagger.Provides;
 import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import retrofit.client.Client;
 import retrofit.client.OkClient;
 import retrofit.converter.Converter;

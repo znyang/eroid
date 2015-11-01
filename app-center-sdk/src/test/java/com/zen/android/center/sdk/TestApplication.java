@@ -2,8 +2,8 @@ package com.zen.android.center.sdk;
 
 import android.app.Application;
 
-import com.zen.android.center.sdk.inject.DaggerTestCenterComponent;
-import com.zen.android.center.sdk.inject.component.CenterComponent;
+import com.zen.android.center.sdk.injection.DaggerTestCenterComponent;
+import com.zen.android.center.sdk.injection.component.CenterComponent;
 
 /**
  * TestApplication

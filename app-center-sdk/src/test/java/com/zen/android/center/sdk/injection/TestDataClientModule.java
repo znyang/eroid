@@ -1,4 +1,4 @@
-package com.zen.android.center.sdk.inject;
+package com.zen.android.center.sdk.injection;
 
 import com.zen.android.center.sdk.model.LoginSession;
 import com.zen.android.center.sdk.model.UserSession;

@@ -4,12 +4,12 @@ import com.zen.android.eroid.ui.DroidActivity;
 import com.zen.android.eroid.ui.DroidFragment;
 
 /**
- * IDroidAppComponent
+ * IDroidComponent
  *
  * @author zeny
  * @version 2015.10.25
  */
-public interface IDroidAppComponent {
+public interface IDroidComponent {
 
     void inject(DroidActivity activity);
 

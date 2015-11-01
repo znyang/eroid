@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.Process;
 
 import com.zen.android.eroid.base.ContextUtil;
-import com.zen.android.eroid.inject.AppComponentManager;
-import com.zen.android.eroid.inject.component.DaggerIProDroidAppComponent;
+import com.zen.android.eroid.inject.DroidComponentManager;
+import com.zen.android.eroid.inject.component.DaggerIProDroidComponent;
 import com.zen.android.eroid.ui.page.PageManager;
 
 /**
@@ -22,7 +22,7 @@ public class DroidApp extends Application {
         super.onCreate();
 
         ContextUtil.setAppContext(this);
-        AppComponentManager.init(DaggerIProDroidAppComponent.builder().build());
+        DroidComponentManager.init(DaggerIProDroidComponent.builder().build());
     }
 
     protected void beforeExit() {
