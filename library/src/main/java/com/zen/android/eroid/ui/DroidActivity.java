@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import com.zen.android.eroid.inject.DroidComponentManager;
+import com.zen.android.eroid.injection.DroidComponentManager;
 import com.zen.android.eroid.ui.page.DroidPageDelegate;
 
 import rx.Subscription;

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.Process;
 
 import com.zen.android.eroid.base.ContextUtil;
-import com.zen.android.eroid.inject.DroidComponentManager;
-import com.zen.android.eroid.inject.component.DaggerIProDroidComponent;
+import com.zen.android.eroid.injection.DroidComponentManager;
+import com.zen.android.eroid.injection.component.DaggerIProDroidComponent;
 import com.zen.android.eroid.ui.page.PageManager;
 
 /**

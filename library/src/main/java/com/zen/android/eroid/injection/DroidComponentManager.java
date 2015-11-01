@@ -1,6 +1,6 @@
-package com.zen.android.eroid.inject;
+package com.zen.android.eroid.injection;
 
-import com.zen.android.eroid.inject.component.IDroidComponent;
+import com.zen.android.eroid.injection.component.IDroidComponent;
 
 /**
  * DroidComponentManager

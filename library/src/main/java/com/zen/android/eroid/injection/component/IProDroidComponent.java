@@ -1,6 +1,6 @@
-package com.zen.android.eroid.inject.component;
+package com.zen.android.eroid.injection.component;
 
-import com.zen.android.eroid.inject.module.DroidAppModule;
+import com.zen.android.eroid.injection.module.DroidAppModule;
 
 import javax.inject.Singleton;
 
