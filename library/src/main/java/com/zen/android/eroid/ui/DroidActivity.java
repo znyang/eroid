@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import com.zen.android.eroid.inject.AppComponentManager;
+import com.zen.android.eroid.injection.DroidComponentManager;
 import com.zen.android.eroid.ui.page.DroidPageDelegate;
 
 import rx.Subscription;
@@ -20,7 +20,7 @@ public class DroidActivity extends AppCompatActivity {
     private DroidPageDelegate<DroidActivity> mDroidPageDelegate;
 
     public DroidActivity() {
-        AppComponentManager.get().inject(this);
+        DroidComponentManager.get().inject(this);
     }
 
     @Override

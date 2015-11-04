@@ -1,4 +1,4 @@
-package com.zen.android.eroid.inject.module;
+package com.zen.android.eroid.injection.module;
 
 import dagger.Module;
 

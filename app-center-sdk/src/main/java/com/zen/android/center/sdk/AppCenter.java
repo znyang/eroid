@@ -1,7 +1,7 @@
 package com.zen.android.center.sdk;
 
-import com.zen.android.center.sdk.inject.component.CenterComponent;
-import com.zen.android.center.sdk.inject.component.DaggerProCenterComponent;
+import com.zen.android.center.sdk.injection.component.CenterComponent;
+import com.zen.android.center.sdk.injection.component.DaggerProCenterComponent;
 import com.zen.android.center.sdk.protocol.ClientApi;
 
 import javax.inject.Inject;

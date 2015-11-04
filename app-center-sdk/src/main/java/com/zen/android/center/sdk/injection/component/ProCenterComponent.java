@@ -1,7 +1,7 @@
-package com.zen.android.center.sdk.inject.component;
+package com.zen.android.center.sdk.injection.component;
 
 
-import com.zen.android.center.sdk.inject.module.DataClientModule;
+import com.zen.android.center.sdk.injection.module.DataClientModule;
 
 import javax.inject.Singleton;
 
