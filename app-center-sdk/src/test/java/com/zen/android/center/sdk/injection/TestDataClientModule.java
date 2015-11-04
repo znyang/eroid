@@ -1,6 +1,8 @@
 package com.zen.android.center.sdk.injection;
 
+import com.zen.android.center.sdk.model.App;
 import com.zen.android.center.sdk.model.LoginSession;
+import com.zen.android.center.sdk.model.RowEntry;
 import com.zen.android.center.sdk.model.UserSession;
 import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.center.sdk.protocol.entry.UserEntry;
@@ -42,6 +44,12 @@ public class TestDataClientModule {
                 LoginSession session = Mockito.mock(LoginSession.class);
                 Mockito.when(session.getSessionToken()).thenReturn("login-token");
                 return Observable.just(session);
+            }
+
+            @Override
+            public Observable<RowEntry<App>> getAppList(@Query(FIELD_SKIP) int skip,
+                                                        @Query(FIELD_LIMIT) int limit) {
+                return null;
             }
         };
     }

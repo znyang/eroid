@@ -3,6 +3,7 @@ package com.zen.android.center.sdk.injection.module;
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zen.android.center.sdk.CenterConfig;
 import com.zen.android.center.sdk.exception.CenterException;
 import com.zen.android.center.sdk.exception.DataParseException;
 import com.zen.android.center.sdk.model.ErrorEntry;
@@ -60,17 +61,17 @@ public class DataClientModule {
         return new IClientConfig() {
             @Override
             public String getApplicationId() {
-                return "l4rhizh7at7vtjum2l2p53m2aw6215uctyfgbghs799pocgo";
+                return CenterConfig.APP_ID;
             }
 
             @Override
             public String getApplicationKey() {
-                return "i2gkri4pr9gv3r072749qin7zomnj1o4jvcuk8rlp5dbag2e";
+                return CenterConfig.APP_KEY;
             }
 
             @Override
             public String getBaseUrl() {
-                return "https://api.leancloud.cn/1.1";
+                return CenterConfig.BASE_URL;
             }
         };
     }
@@ -87,7 +88,7 @@ public class DataClientModule {
     @Provides
     @Singleton
     public RestAdapter.Log providerLog() {
-        return message -> Log.d("AppCenterSdk", message);
+        return message -> Log.d(CenterConfig.LOG_TAG, message);
     }
 
     @Provides

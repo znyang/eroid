@@ -1,9 +1,13 @@
 package com.zen.android.center.sdk.protocol;
 
 
+import com.zen.android.center.sdk.model.App;
 import com.zen.android.center.sdk.model.LoginSession;
+import com.zen.android.center.sdk.model.RowEntry;
 import com.zen.android.center.sdk.model.UserSession;
 import com.zen.android.center.sdk.protocol.entry.UserEntry;
+
+import java.util.List;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -22,6 +26,8 @@ public interface ClientApi {
 
     String FIELD_USERNAME = "username";
     String FIELD_PASSWORD = "password";
+    String FIELD_LIMIT    = "limit";
+    String FIELD_SKIP     = "skip";
 
     /**
      * 注册
@@ -41,5 +47,15 @@ public interface ClientApi {
     @GET("/login")
     Observable<LoginSession> login(@Query(FIELD_USERNAME) String username,
                                    @Query(FIELD_PASSWORD) String password);
+
+    /**
+     * get applications
+     *
+     * @return
+     */
+    @GET("/classes/App")
+    Observable<RowEntry<App>> getAppList(@Query(FIELD_SKIP) int skip,
+                                     @Query(FIELD_LIMIT) int limit);
+
 
 }
