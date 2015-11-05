@@ -26,7 +26,7 @@ public class AppCenterMockTest {
     @Test
     public void testLogin() throws Exception {
         EvilReference<LoginSession> session = new EvilReference<>(null);
-        AppCenter.client().login("123", "234").subscribe(session::setData);
+        new AppCenter().getApi().login("123", "234").subscribe(session::setData);
         assertEquals(session.getData().getSessionToken(), "login-token");
     }
 
@@ -34,7 +34,7 @@ public class AppCenterMockTest {
     @Test
     public void testRegister() throws Exception {
         EvilReference<UserSession> session = new EvilReference<>(null);
-        AppCenter.client().register(new UserEntry("123","234")).subscribe(session::setData);
+        new AppCenter().getApi().register(new UserEntry("123","234")).subscribe(session::setData);
         assertEquals(session.getData().getSessionToken(), "register-token");
 
     }

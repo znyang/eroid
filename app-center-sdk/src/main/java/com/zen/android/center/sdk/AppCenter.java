@@ -25,8 +25,8 @@ public class AppCenter {
         CenterComponent.Instance.init(DaggerProCenterComponent.builder().build());
     }
 
-    public static ClientApi client() {
-        return new AppCenter().mApi;
+    public ClientApi getApi() {
+        return mApi;
     }
 
 }

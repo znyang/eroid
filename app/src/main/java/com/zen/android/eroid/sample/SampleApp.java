@@ -1,6 +1,8 @@
 package com.zen.android.eroid.sample;
 
 import com.zen.android.eroid.DroidApp;
+import com.zen.android.eroid.sample.injection.DaggerIProAppComponent;
+import com.zen.android.eroid.sample.injection.InjectManager;
 
 /**
  * SampleApp
@@ -9,4 +11,11 @@ import com.zen.android.eroid.DroidApp;
  * @version 2015.10.24
  */
 public class SampleApp extends DroidApp {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        InjectManager.init(DaggerIProAppComponent.builder().build());
+    }
 }
