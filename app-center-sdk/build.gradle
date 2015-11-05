@@ -7,11 +7,6 @@ apply from: "${rootDir}/config/retrolambda.gradle"
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
-    testCompile parent.testLibs.junit
-    testCompile parent.testLibs.mockito
-    testCompile parent.testLibs.robolectric
-    testCompile parent.libs.dagger
-    testApt parent.libs.daggerCompiler
 
     apt parent.libs.daggerCompiler
     compile parent.libs.dagger
@@ -21,5 +16,9 @@ dependencies {
     compile parent.libs.rxAndroid
     compile parent.libs.retrofitWithJackson
 
-    this.name
+    testCompile parent.testLibs.junit
+    testCompile parent.testLibs.mockito
+    testCompile parent.testLibs.robolectric
+    testCompile parent.libs.dagger
+    testApt parent.libs.daggerCompiler
 }

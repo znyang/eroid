@@ -1,5 +1,6 @@
 package com.zen.android.eroid.sample.ui.base;
 
+import com.zen.android.eroid.sample.injection.InjectManager;
 import com.zen.android.eroid.ui.DroidActivity;
 
 /**
@@ -8,5 +9,10 @@ import com.zen.android.eroid.ui.DroidActivity;
  * @author zeny
  * @version 2015.10.24
  */
-public abstract class BaseActivity extends DroidActivity{
+public abstract class BaseActivity extends DroidActivity {
+
+    public BaseActivity() {
+        InjectManager.getComponent().inject(this);
+    }
+
 }
