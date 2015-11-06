@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,8 +33,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zen.android.center.sdk.AppCenter;
 import com.zen.android.eroid.sample.R;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -74,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.inject(this);
         // Set up the login form.
         populateAutoComplete();
 
@@ -87,6 +91,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.reset(this);
     }
 
     private void populateAutoComplete() {
@@ -182,8 +192,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+//            mAuthTask = new UserLoginTask(email, password);
+//            mAuthTask.execute((Void) null);
+
+            new AppCenter().getApi().login("123", "345")
+                    .subscribe(r -> {
+                        Log.d("login", r.toString());
+                    }, e -> {
+                        Log.d("login", e.getMessage());
+                    });
         }
     }
 
@@ -335,7 +352,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         protected void onPostExecute(List<String> emailAddressCollection) {
             addEmailsToAutoComplete(emailAddressCollection);
         }
-    }    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
+    }
+
+    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
@@ -361,13 +380,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+            new AppCenter().getApi().login(mEmail, mPassword)
+                    .subscribe(result -> {
+                                Log.d("UserLoginTask", result.toString());
+                            },
+                            e -> {
+                                Log.d("UserLoginTask", "error");
+                            });
 
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
