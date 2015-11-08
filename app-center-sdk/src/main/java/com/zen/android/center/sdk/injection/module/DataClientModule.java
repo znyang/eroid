@@ -131,6 +131,12 @@ public class DataClientModule {
             switch (err.getKind()) {
                 case NETWORK:
                     return new IOException("network error");
+                case CONVERSION:
+                    return new DataParseException("(de)serializing the body error");
+                case HTTP:
+                    if (err.getResponse() != null) {
+                        return new IOException(err.getResponse().getStatus() + ":" + err.getMessage());
+                    }
                 default:
                     ErrorEntry entry = (ErrorEntry) err.getBodyAs(ErrorEntry.class);
                     if (entry != null) {

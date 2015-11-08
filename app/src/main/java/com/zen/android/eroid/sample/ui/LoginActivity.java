@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
@@ -38,6 +39,9 @@ import com.zen.android.eroid.sample.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.internal.schedulers.ScheduledAction;
+import rx.schedulers.Schedulers;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -151,6 +155,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+        long start = SystemClock.elapsedRealtime();
         if (mAuthTask != null) {
             return;
         }
@@ -192,16 +197,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-//            mAuthTask = new UserLoginTask(email, password);
-//            mAuthTask.execute((Void) null);
+            long st = SystemClock.elapsedRealtime();
+            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask.execute((Void) null);
 
-            new AppCenter().getApi().login("123", "345")
-                    .subscribe(r -> {
-                        Log.d("login", r.toString());
-                    }, e -> {
-                        Log.d("login", e.getMessage());
-                    });
+//            new AppCenter().getApi().login("123", "345")
+//                    .subscribe(r -> {
+//                        Log.d("login", r.toString());
+//                    }, e -> {
+//                        Log.d("login", e.getMessage());
+//                    });
+            Log.d("LoginActivity", "Login action cost: " + (SystemClock.elapsedRealtime() - st));
         }
+        Log.d("LoginActivity", "doLogin cost: " + (SystemClock.elapsedRealtime() - start));
     }
 
     private boolean isEmailValid(String email) {
@@ -380,6 +388,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+
             new AppCenter().getApi().login(mEmail, mPassword)
                     .subscribe(result -> {
                                 Log.d("UserLoginTask", result.toString());
