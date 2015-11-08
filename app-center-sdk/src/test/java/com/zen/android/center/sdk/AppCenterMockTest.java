@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.concurrent.CountDownLatch;
+
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -34,8 +36,7 @@ public class AppCenterMockTest {
     @Test
     public void testRegister() throws Exception {
         EvilReference<UserSession> session = new EvilReference<>(null);
-        new AppCenter().getApi().register(new UserEntry("123","234")).subscribe(session::setData);
+        new AppCenter().getApi().register(new UserEntry("123", "234")).subscribe(session::setData);
         assertEquals(session.getData().getSessionToken(), "register-token");
-
     }
 }

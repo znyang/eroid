@@ -1,5 +1,6 @@
 package com.zen.android.eroid.sample;
 
+import com.zen.android.center.sdk.AppCenter;
 import com.zen.android.eroid.DroidApp;
 import com.zen.android.eroid.sample.injection.DaggerIProAppComponent;
 import com.zen.android.eroid.sample.injection.InjectManager;
@@ -17,5 +18,6 @@ public class SampleApp extends DroidApp {
         super.onCreate();
 
         InjectManager.init(DaggerIProAppComponent.builder().build());
+        AppCenter.init();
     }
 }
