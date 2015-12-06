@@ -1,5 +1,6 @@
 package com.zen.android.eroid.sample.ui.base;
 
+import com.zen.android.center.sdk.AppCenterApi;
 import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.eroid.sample.injection.InjectManager;
 import com.zen.android.eroid.ui.DroidFragment;
@@ -15,14 +16,14 @@ import javax.inject.Inject;
 public abstract class BaseFragment extends DroidFragment {
 
     @Inject
-    ClientApi mClientApi;
+    AppCenterApi mAppCenterApi;
 
     public BaseFragment() {
         InjectManager.getComponent().inject(this);
     }
 
-    public ClientApi getClientApi() {
-        return mClientApi;
+    public AppCenterApi getAppCenter() {
+        return mAppCenterApi;
     }
 
 }

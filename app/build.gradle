@@ -15,8 +15,9 @@ dependencies {
     compile parent.libs.dagger
     compile parent.libs.supportDesign
     compile parent.libs.butterKnife
-    compile 'com.android.support:support-v4:23.1.0'
+    compile 'com.android.support:support-v4:23.1.1'
     compile 'com.marshalchen.ultimaterecyclerview:library:0.3.18'
+    compile 'com.github.tosslife:pullloadview:1.1.0'
 
     testCompile parent.testLibs.junit
     testCompile parent.testLibs.mockito

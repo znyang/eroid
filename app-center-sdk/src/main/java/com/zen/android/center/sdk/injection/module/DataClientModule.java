@@ -9,15 +9,10 @@ import com.zen.android.center.sdk.exception.DataParseException;
 import com.zen.android.center.sdk.model.ErrorEntry;
 import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.center.sdk.protocol.IClientConfig;
-import com.zen.android.center.sdk.util.UiThreadExecutor;
 import com.zen.android.eroid.data.ObjectMapperFactory;
 
 import java.io.IOException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -40,15 +35,13 @@ public class DataClientModule {
     @Provides
     @Singleton
     public ClientApi provideClientApi(IClientConfig config, RestAdapter.Log log, Converter converter,
-                                      RequestInterceptor interceptor, ErrorHandler errorHandler, Client client,
-                                      @Named("http") Executor httpExecutor,
-                                      @Named("callback") Executor callbackExecutor) {
+                                      RequestInterceptor interceptor, ErrorHandler errorHandler, Client client) {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(config.getBaseUrl())
                 .setLog(log)
                 .setConverter(converter)
                 .setClient(client)
-                .setExecutors(httpExecutor, callbackExecutor)
+//                .setExecutors(httpExecutor, callbackExecutor)
                 .setRequestInterceptor(interceptor)
                 .setErrorHandler(errorHandler)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
@@ -56,19 +49,19 @@ public class DataClientModule {
         return adapter.create(ClientApi.class);
     }
 
-    @Provides
-    @Singleton
-    @Named("http")
-    public Executor provideHttpExecutor() {
-        return Executors.newCachedThreadPool(r -> new Thread(r, "Http Executor"));
-    }
-
-    @Provides
-    @Singleton
-    @Named("callback")
-    public Executor provideCallbackExecutor() {
-        return new UiThreadExecutor();
-    }
+//    @Provides
+//    @Singleton
+//    @Named("http")
+//    public Executor provideHttpExecutor() {
+//        return Executors.newCachedThreadPool(r -> new Thread(r, "Http Executor"));
+//    }
+//
+//    @Provides
+//    @Singleton
+//    @Named("callback")
+//    public Executor provideCallbackExecutor() {
+//        return new UiThreadExecutor();
+//    }
 
     @Provides
     @Singleton

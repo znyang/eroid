@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * BaseLayoutFragment
  *
@@ -17,7 +19,9 @@ public abstract class BaseLayoutFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), container, false);
+        View root = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.inject(this, root);
+        return root;
     }
 
     protected abstract int getLayoutId();

@@ -19,7 +19,7 @@ import rx.Observable;
  * @author zeny
  * @version 2015.10.26
  */
-public interface ClientApi {
+public interface  ClientApi {
 
     String KEY_APPLICATION_ID  = "X-AVOSCloud-Application-Id";
     String KEY_APPLICATION_KEY = "X-AVOSCloud-Application-Key";

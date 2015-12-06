@@ -3,8 +3,12 @@ package com.zen.android.center.sdk;
 import com.zen.android.center.sdk.injection.component.CenterComponent;
 import com.zen.android.center.sdk.injection.component.DaggerProCenterComponent;
 import com.zen.android.center.sdk.protocol.ClientApi;
+import com.zen.android.eroid.base.ContextUtil;
 
 import javax.inject.Inject;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * AppCenter
@@ -15,7 +19,7 @@ import javax.inject.Inject;
 public class AppCenter {
 
     @Inject
-    ClientApi mApi;
+    AppCenterApi mApi;
 
     public AppCenter() {
         CenterComponent.Instance.get().inject(this);
@@ -23,9 +27,12 @@ public class AppCenter {
 
     public static void init() {
         CenterComponent.Instance.init(DaggerProCenterComponent.builder().build());
+
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(ContextUtil.getAppContext()).build();
+        Realm.setDefaultConfiguration(realmConfiguration);
     }
 
-    public ClientApi getApi() {
+    public AppCenterApi getApi() {
         return mApi;
     }
 

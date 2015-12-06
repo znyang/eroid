@@ -1,18 +1,11 @@
 package com.zen.android.center.sdk;
 
-import com.zen.android.center.sdk.base.EvilReference;
-import com.zen.android.center.sdk.model.LoginSession;
-import com.zen.android.center.sdk.model.UserSession;
-import com.zen.android.center.sdk.protocol.entry.UserEntry;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.concurrent.CountDownLatch;
-
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * AppCenterMockTest
@@ -27,16 +20,14 @@ public class AppCenterMockTest {
 
     @Test
     public void testLogin() throws Exception {
-        EvilReference<LoginSession> session = new EvilReference<>(null);
-        new AppCenter().getApi().login("123", "234").subscribe(session::setData);
-        assertEquals(session.getData().getSessionToken(), "login-token");
+        boolean result = new AppCenter().getApi().login("123", "234").toBlocking().last();
+        assertTrue(result);
     }
 
 
     @Test
     public void testRegister() throws Exception {
-        EvilReference<UserSession> session = new EvilReference<>(null);
-        new AppCenter().getApi().register(new UserEntry("123", "234")).subscribe(session::setData);
-        assertEquals(session.getData().getSessionToken(), "register-token");
+        boolean result = new AppCenter().getApi().register("123", "234").toBlocking().last();
+        assertTrue(result);
     }
 }
