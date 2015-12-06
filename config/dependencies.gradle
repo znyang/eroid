@@ -41,7 +41,8 @@ allprojects {
                 okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
                 nineOldAndroid     : "com.nineoldandroids:library:${nineOldAndroidVersion}",
                 rxJava             : "io.reactivex:rxjava:${rxJavaVersion}",
-                rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}"
+                rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
+                realm              : "io.realm:realm-android:0.86.0"
         ]
 
         testLibs = [

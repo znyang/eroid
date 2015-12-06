@@ -7,7 +7,9 @@ import com.zen.android.center.sdk.model.UserSession;
 import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.center.sdk.protocol.entry.UserEntry;
 
-import org.mockito.Mockito;
+import java.util.List;
+
+import static org.mockito.Mockito.*;
 
 import javax.inject.Singleton;
 
@@ -33,23 +35,32 @@ public class TestDataClientModule {
 
             @Override
             public Observable<UserSession> register(@Body UserEntry userEntry) {
-                UserSession session = Mockito.mock(UserSession.class);
-                Mockito.when(session.getSessionToken()).thenReturn("register-token");
+                UserSession session = mock(UserSession.class);
+                when(session.getSessionToken()).thenReturn("register-token");
                 return Observable.just(session);
             }
 
             @Override
             public Observable<LoginSession> login(@Query(FIELD_USERNAME) String username,
                                                   @Query(FIELD_PASSWORD) String password) {
-                LoginSession session = Mockito.mock(LoginSession.class);
-                Mockito.when(session.getSessionToken()).thenReturn("login-token");
+                LoginSession session = mock(LoginSession.class);
+                when(session.getSessionToken()).thenReturn("login-token");
                 return Observable.just(session);
             }
 
             @Override
+            @SuppressWarnings("unchecked")
             public Observable<RowEntry<App>> getAppList(@Query(FIELD_SKIP) int skip,
                                                         @Query(FIELD_LIMIT) int limit) {
-                return null;
+                App app = mock(App.class);
+                when(app.getAppName()).thenReturn("hehe");
+
+                List list = mock(List.class);
+                list.add(app);
+
+                RowEntry entry = mock(RowEntry.class);
+                when(entry.getResults()).thenReturn(list);
+                return Observable.just(entry);
             }
         };
     }

@@ -61,14 +61,9 @@ public final class PageManager {
      */
     public void clearExcept(final Class<? extends Activity> clazz) {
         Observable.from(mReferences)
-                .filter(ref -> {
-                    if (ref == null) {
-                        return false;
-                    }
-                    Activity activity = ref.get();
-                    return activity != null && !activity.getClass().equals(clazz);
-                })
+                .filter(ref -> ref != null)
                 .map(Reference::get)
+                .filter(activity -> activity != null && !activity.getClass().equals(clazz))
                 .subscribe(Activity::finish);
     }
 

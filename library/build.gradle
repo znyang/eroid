@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: "${rootDir}/config/android.gradle"
+apply from: "${rootDir}/config/jacoco.gradle"
 apply from: "${rootDir}/config/retrolambda.gradle"
 
 dependencies {
@@ -15,4 +16,10 @@ dependencies {
     compile parent.libs.jacksonDatabind
 
     provided parent.libs.supportAnnotation
+
+    testCompile parent.testLibs.junit
+    testCompile parent.testLibs.mockito
+    testCompile parent.testLibs.robolectric
+    testCompile parent.libs.dagger
+    testApt parent.libs.daggerCompiler
 }

@@ -1,6 +1,7 @@
 package com.zen.android.eroid.sample.injection;
 
 import com.zen.android.center.sdk.AppCenter;
+import com.zen.android.center.sdk.AppCenterApi;
 import com.zen.android.center.sdk.protocol.ClientApi;
 
 import javax.inject.Singleton;
@@ -20,7 +21,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public ClientApi provideClientApi(AppCenter center) {
+    public AppCenterApi provideAppCenterApi(AppCenter center) {
         return center.getApi();
     }
 
