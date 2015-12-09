@@ -15,10 +15,14 @@ import rx.Observable;
  */
 public abstract class BaseCenterStore<T> implements BaseStore<T> {
 
-    private CenterStoreHelper mCenterStoreHelper = new CenterStoreHelper();
+    private static CenterStoreHelper sCenterStoreHelper = new CenterStoreHelper();
 
     protected ClientApi getClientApi() {
-        return mCenterStoreHelper.getClientApi();
+        return sCenterStoreHelper.getClientApi();
+    }
+
+    protected Realm getRealm() {
+        return sCenterStoreHelper.getRealm();
     }
 
     public Observable<T> concat() {
@@ -29,22 +33,8 @@ public abstract class BaseCenterStore<T> implements BaseStore<T> {
         return isRefresh ? concat().last() : concat().first();
     }
 
-    public static <T> T task(RealmTask<T> task) {
-        Realm realm = Realm.getDefaultInstance();
-        try {
-            return task.execute(realm);
-        } finally {
-            realm.close();
-        }
-    }
-
-    public static void taskVoid(RealmVoidTask task) {
-        Realm realm = Realm.getDefaultInstance();
-        try {
-            task.execute(realm);
-        } finally {
-            realm.close();
-        }
+    public static void onRecycle() {
+        sCenterStoreHelper.getRealm().close();
     }
 
 }

@@ -1,22 +1,20 @@
 package com.zen.android.eroid.sample.ui.center;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
 import com.srx.widget.PullCallback;
 import com.srx.widget.PullToLoadView;
 import com.zen.android.center.sdk.model.App;
 import com.zen.android.eroid.sample.R;
 import com.zen.android.eroid.sample.ui.base.BaseLayoutFragment;
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * AppListFragment
@@ -43,6 +41,8 @@ public class AppListFragment extends BaseLayoutFragment {
     public void onStart() {
         super.onStart();
 
+        mPullToLoadView.getRecyclerView().setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mPullToLoadView.isLoadMoreEnabled(true);
         mPullToLoadView.setPullCallback(new PullCallback() {
             @Override
@@ -65,11 +65,13 @@ public class AppListFragment extends BaseLayoutFragment {
                 return false;
             }
         });
+        mPullToLoadView.initLoad();
     }
 
 
     private void doRefresh(int currentCount) {
         Subscription subscription = getAppCenter().getAppList(currentCount, PAGE_SIZE).first()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                     updateData(currentCount, result);
                 });
