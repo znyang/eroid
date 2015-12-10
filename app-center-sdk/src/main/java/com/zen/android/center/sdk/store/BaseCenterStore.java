@@ -1,5 +1,6 @@
 package com.zen.android.center.sdk.store;
 
+import com.zen.android.center.sdk.base.RealmManager;
 import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.center.sdk.store.base.RealmTask;
 import com.zen.android.center.sdk.store.base.RealmVoidTask;
@@ -22,7 +23,7 @@ public abstract class BaseCenterStore<T> implements BaseStore<T> {
     }
 
     protected Realm getRealm() {
-        return sCenterStoreHelper.getRealm();
+        return RealmManager.getRealm();
     }
 
     public Observable<T> concat() {
@@ -31,10 +32,6 @@ public abstract class BaseCenterStore<T> implements BaseStore<T> {
 
     public Observable<T> fetch(boolean isRefresh) {
         return isRefresh ? concat().last() : concat().first();
-    }
-
-    public static void onRecycle() {
-        sCenterStoreHelper.getRealm().close();
     }
 
 }

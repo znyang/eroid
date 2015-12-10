@@ -1,5 +1,6 @@
 package com.zen.android.center.sdk;
 
+import com.zen.android.center.sdk.base.RealmManager;
 import com.zen.android.center.sdk.injection.component.CenterComponent;
 import com.zen.android.center.sdk.injection.component.DaggerProCenterComponent;
 import com.zen.android.center.sdk.protocol.ClientApi;
@@ -22,8 +23,6 @@ public class AppCenter {
 
     @Inject
     AppCenterApi mApi;
-    @Inject
-    Realm        mRealm;
 
     public AppCenter() {
         CenterComponent.Instance.get().inject(this);
@@ -31,10 +30,11 @@ public class AppCenter {
 
     public static void init() {
         CenterComponent.Instance.init(DaggerProCenterComponent.builder().build());
+        RealmManager.init();
     }
 
     public static void recycle() {
-        BaseCenterStore.onRecycle();
+        RealmManager.recycle();
     }
 
     public AppCenterApi getApi() {

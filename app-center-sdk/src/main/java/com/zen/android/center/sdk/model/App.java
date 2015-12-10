@@ -3,6 +3,7 @@ package com.zen.android.center.sdk.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * App
@@ -24,6 +25,7 @@ public class App extends RealmObject {
     private String appName;
     @JsonProperty("createdAt")
     private String createdAt;
+    @PrimaryKey
     @JsonProperty("objectId")
     private String objectId;
 

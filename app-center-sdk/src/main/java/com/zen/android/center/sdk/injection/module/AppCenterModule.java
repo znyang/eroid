@@ -57,16 +57,4 @@ public class AppCenterModule {
         };
     }
 
-    @Singleton
-    @Provides
-    Realm provideRealm(RealmConfiguration configuration){
-        return Realm.getInstance(configuration);
-    }
-
-    @Singleton
-    @Provides
-    RealmConfiguration provideRealmConfiguration(){
-        return new RealmConfiguration.Builder(ContextUtil.getAppContext()).build();
-    }
-
 }
