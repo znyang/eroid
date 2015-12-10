@@ -20,4 +20,10 @@ public class SampleApp extends DroidApp {
         InjectManager.init(DaggerIProAppComponent.builder().build());
         AppCenter.init();
     }
+
+    @Override
+    protected void beforeExit() {
+        super.beforeExit();
+        AppCenter.recycle();
+    }
 }

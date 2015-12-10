@@ -1,22 +1,25 @@
 package com.zen.android.eroid.sample.ui.center;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.marshalchen.ultimaterecyclerview.CustomLinearLayoutManager;
 import com.srx.widget.PullCallback;
 import com.srx.widget.PullToLoadView;
 import com.zen.android.center.sdk.model.App;
 import com.zen.android.eroid.sample.R;
 import com.zen.android.eroid.sample.ui.base.BaseLayoutFragment;
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * AppListFragment
@@ -32,7 +35,7 @@ public class AppListFragment extends BaseLayoutFragment {
     @InjectView(R.id.plv_center)
     PullToLoadView mPullToLoadView;
 
-    private List<App> mData;
+    private ListAdapter mListAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -42,6 +45,11 @@ public class AppListFragment extends BaseLayoutFragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        mPullToLoadView.getRecyclerView().setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mListAdapter = new ListAdapter();
+        mPullToLoadView.getRecyclerView().setAdapter(mListAdapter);
 
         mPullToLoadView.isLoadMoreEnabled(true);
         mPullToLoadView.setPullCallback(new PullCallback() {
@@ -65,24 +73,91 @@ public class AppListFragment extends BaseLayoutFragment {
                 return false;
             }
         });
+//        mPullToLoadView.initLoad();
     }
 
 
     private void doRefresh(int currentCount) {
-        Subscription subscription = getAppCenter().getAppList(currentCount, PAGE_SIZE).first()
+        Subscription subscription = getAppCenter()
+                .getAppList(currentCount, PAGE_SIZE).first()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-                    updateData(currentCount, result);
-                });
+                            updateData(currentCount, result);
+                        },
+                        throwable -> {
+                            mPullToLoadView.setComplete();
+                            showMessage(throwable.getMessage());
+                        },
+                        () -> mPullToLoadView.setComplete());
         collect(subscription);
     }
 
-    private void updateData(int start, List<App> data) {
-        if (mData == null) {
-            mData = new ArrayList<>();
-        }
-        if (mData.size() < start) {
+    private void showMessage(CharSequence message) {
+        if (getView() == null) {
             return;
         }
-        mData.addAll(start, data);
+        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    private void updateData(int start, List<App> data) {
+        if (mListAdapter == null) {
+            return;
+        }
+        List<App> target = mListAdapter.getData();
+        if (target == null) {
+            target = new ArrayList<>();
+        }
+        if (target.size() < start) {
+            return;
+        }
+        target.remove(start);
+        target.addAll(start, data);
+
+        mListAdapter.setData(target);
+        mListAdapter.notifyDataSetChanged();
+    }
+
+    private static class ListAdapter extends RecyclerView.Adapter<ViewHolder> {
+
+        private List<App> mData;
+
+        public void setData(List<App> data) {
+            mData = data;
+        }
+
+        public List<App> getData() {
+            return mData;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_item_app, parent, false);
+            return new ViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.populateView(mData.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mData == null ? 0 : mData.size();
+        }
+    }
+
+    private static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView mTvAppName;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            mTvAppName = (TextView) itemView.findViewById(R.id.tv_app_name);
+        }
+
+        private void populateView(App app) {
+            mTvAppName.setText(app.getAppName());
+        }
     }
 }

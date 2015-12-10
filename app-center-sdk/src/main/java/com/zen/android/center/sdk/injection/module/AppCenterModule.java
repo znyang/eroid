@@ -3,7 +3,9 @@ package com.zen.android.center.sdk.injection.module;
 import com.zen.android.center.sdk.AppCenterApi;
 import com.zen.android.center.sdk.model.App;
 import com.zen.android.center.sdk.model.UserSession;
+import com.zen.android.center.sdk.store.app.AppStore;
 import com.zen.android.center.sdk.store.user.UserLoginStore;
+import com.zen.android.eroid.base.ContextUtil;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import rx.Observable;
 
 /**
@@ -48,7 +52,7 @@ public class AppCenterModule {
 
             @Override
             public Observable<List<App>> getAppList(int skip, int limit) {
-                return null;
+                return new AppStore(skip, limit).concat();
             }
         };
     }

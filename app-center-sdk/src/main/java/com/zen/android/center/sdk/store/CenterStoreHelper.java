@@ -5,6 +5,8 @@ import com.zen.android.center.sdk.protocol.ClientApi;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
+
 /**
  * CenterStoreHelper
  *
@@ -23,4 +25,5 @@ public class CenterStoreHelper {
     public ClientApi getClientApi() {
         return mClientApi;
     }
+
 }
