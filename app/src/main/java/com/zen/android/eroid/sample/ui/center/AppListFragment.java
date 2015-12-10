@@ -55,7 +55,10 @@ public class AppListFragment extends BaseLayoutFragment {
         mPullToLoadView.setPullCallback(new PullCallback() {
             @Override
             public void onLoadMore() {
-
+                if (mListAdapter == null) {
+                    return;
+                }
+                doRefresh(mListAdapter.getItemCount());
             }
 
             @Override
@@ -79,11 +82,10 @@ public class AppListFragment extends BaseLayoutFragment {
 
     private void doRefresh(int currentCount) {
         Subscription subscription = getAppCenter()
-                .getAppList(currentCount, PAGE_SIZE).first()
+                .getAppList(currentCount, PAGE_SIZE).last()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                            updateData(currentCount, result);
-                        },
+                .subscribe(
+                        result -> updateData(currentCount, result),
                         throwable -> {
                             mPullToLoadView.setComplete();
                             showMessage(throwable.getMessage());
@@ -110,7 +112,13 @@ public class AppListFragment extends BaseLayoutFragment {
         if (target.size() < start) {
             return;
         }
-        target.remove(start);
+        if (start > 0) {
+            List<App> save = target.subList(0, start);
+            target.clear();
+            target.addAll(save);
+        } else if (target.size() > 0) {
+            target.clear();
+        }
         target.addAll(start, data);
 
         mListAdapter.setData(target);
