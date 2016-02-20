@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * AppListFragment
@@ -81,9 +79,9 @@ public class AppListFragment extends BaseLayoutFragment {
 
 
     private void doRefresh(int currentCount) {
-        Subscription subscription = getAppCenter()
+        getAppCenter()
                 .getAppList(currentCount, PAGE_SIZE).last()
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(async())
                 .subscribe(
                         result -> updateData(currentCount, result),
                         throwable -> {
@@ -91,7 +89,6 @@ public class AppListFragment extends BaseLayoutFragment {
                             showMessage(throwable.getMessage());
                         },
                         () -> mPullToLoadView.setComplete());
-        collect(subscription);
     }
 
     private void showMessage(CharSequence message) {

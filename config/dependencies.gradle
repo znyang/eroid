@@ -1,8 +1,8 @@
 allprojects {
     ext {
-        androidBuildToolsVersion = "23.0.1"
+        androidBuildToolsVersion = "22.0.1"
         androidMinSdkVersion = 9
-        androidTargetSdkVersion = 23
+        androidTargetSdkVersion = 22
         androidCompileSdkVersion = 23
 
         //Libraries
@@ -41,8 +41,7 @@ allprojects {
                 okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
                 nineOldAndroid     : "com.nineoldandroids:library:${nineOldAndroidVersion}",
                 rxJava             : "io.reactivex:rxjava:${rxJavaVersion}",
-                rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
-                realm              : "io.realm:realm-android:0.86.0"
+                rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}"
         ]
 
         testLibs = [

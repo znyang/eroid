@@ -2,16 +2,13 @@ package com.zen.android.center.sdk.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * App
  *
  * @author zeny
  * @version 2015.11.04
  */
-public class App extends RealmObject {
+public class App {
 
     @JsonProperty("version")
     private String version;
@@ -25,7 +22,6 @@ public class App extends RealmObject {
     private String appName;
     @JsonProperty("createdAt")
     private String createdAt;
-    @PrimaryKey
     @JsonProperty("objectId")
     private String objectId;
 

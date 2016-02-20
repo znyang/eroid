@@ -5,8 +5,6 @@ import android.content.Context;
 import android.os.Process;
 
 import com.zen.android.eroid.base.ContextUtil;
-import com.zen.android.eroid.injection.DroidComponentManager;
-import com.zen.android.eroid.injection.component.DaggerIProDroidComponent;
 import com.zen.android.eroid.ui.page.PageManager;
 
 /**
@@ -22,7 +20,6 @@ public class DroidApp extends Application {
         super.onCreate();
 
         ContextUtil.setAppContext(this);
-        DroidComponentManager.init(DaggerIProDroidComponent.builder().build());
     }
 
     protected void beforeExit() {

@@ -1,11 +1,13 @@
 package com.zen.android.eroid.ui;
 
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 
+import com.zen.android.eroid.rx.lifecycle.FragmentEvent;
+import com.zen.android.eroid.rx.support.RxFragment;
+import com.zen.android.eroid.rx.util.SchedulerCompat;
 import com.zen.android.eroid.ui.page.DroidPageDelegate;
 
-import rx.Subscription;
+import rx.Observable;
 
 /**
  * DroidFragment
@@ -13,13 +15,9 @@ import rx.Subscription;
  * @author zeny
  * @version 2015.10.24
  */
-public class DroidFragment extends Fragment {
+public class DroidFragment extends RxFragment {
 
     private DroidPageDelegate<DroidFragment> mDroidPageDelegate;
-
-    public void collect(Subscription subscription) {
-        getDroidPageDelegate().collect(subscription);
-    }
 
     @NonNull
     public DroidPageDelegate<DroidFragment> getDroidPageDelegate() {
@@ -29,10 +27,9 @@ public class DroidFragment extends Fragment {
         return mDroidPageDelegate;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        getDroidPageDelegate().unsubscribe();
+    public <T> Observable.Transformer<T, T> async() {
+        return obs -> obs.compose(bindUntilEvent(FragmentEvent.STOP))
+                .compose(SchedulerCompat.applyIoSchedulers());
     }
 
 }
