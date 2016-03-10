@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import com.srx.widget.PullCallback;
 import com.srx.widget.PullToLoadView;
-import com.zen.android.center.sdk.model.App;
 import com.zen.android.eroid.sample.R;
 import com.zen.android.eroid.sample.ui.base.BaseLayoutFragment;
+import com.zen.android.weather.WeatherClient;
+import com.zen.android.weather.model.City;
+import com.zen.android.weather.protocol.BaseEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,9 +81,9 @@ public class AppListFragment extends BaseLayoutFragment {
 
 
     private void doRefresh(int currentCount) {
-        getAppCenter()
-                .getAppList(currentCount, PAGE_SIZE).last()
+        WeatherClient.getWeatherApi().getCityList()
                 .compose(async())
+                .map(BaseEntry::getRetData)
                 .subscribe(
                         result -> updateData(currentCount, result),
                         throwable -> {
@@ -98,11 +100,11 @@ public class AppListFragment extends BaseLayoutFragment {
         Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
     }
 
-    private void updateData(int start, List<App> data) {
+    private void updateData(int start, List<City> data) {
         if (mListAdapter == null) {
             return;
         }
-        List<App> target = mListAdapter.getData();
+        List<City> target = mListAdapter.getData();
         if (target == null) {
             target = new ArrayList<>();
         }
@@ -110,7 +112,7 @@ public class AppListFragment extends BaseLayoutFragment {
             return;
         }
         if (start > 0) {
-            List<App> save = target.subList(0, start);
+            List<City> save = target.subList(0, start);
             target.clear();
             target.addAll(save);
         } else if (target.size() > 0) {
@@ -124,13 +126,13 @@ public class AppListFragment extends BaseLayoutFragment {
 
     private static class ListAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-        private List<App> mData;
+        private List<City> mData;
 
-        public void setData(List<App> data) {
+        public void setData(List<City> data) {
             mData = data;
         }
 
-        public List<App> getData() {
+        public List<City> getData() {
             return mData;
         }
 
@@ -161,8 +163,8 @@ public class AppListFragment extends BaseLayoutFragment {
             mTvAppName = (TextView) itemView.findViewById(R.id.tv_app_name);
         }
 
-        private void populateView(App app) {
-            mTvAppName.setText(app.getAppName());
+        private void populateView(City app) {
+            mTvAppName.setText(app.getNameCn());
         }
     }
 }

@@ -10,9 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.zen.android.center.sdk.AppCenter;
 import com.zen.android.eroid.sample.R;
 import com.zen.android.eroid.sample.ui.base.BaseActivity;
 

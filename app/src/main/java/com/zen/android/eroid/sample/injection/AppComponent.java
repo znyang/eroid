@@ -2,7 +2,6 @@ package com.zen.android.eroid.sample.injection;
 
 import com.zen.android.eroid.sample.ui.base.BaseActivity;
 import com.zen.android.eroid.sample.ui.base.BaseFragment;
-import com.zen.android.eroid.sample.ui.base.BaseSingleFragmentActivity;
 
 /**
  * AppComponent

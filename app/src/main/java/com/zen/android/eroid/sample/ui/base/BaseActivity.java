@@ -1,9 +1,8 @@
 package com.zen.android.eroid.sample.ui.base;
 
-import com.zen.android.center.sdk.AppCenterApi;
-import com.zen.android.center.sdk.protocol.ClientApi;
 import com.zen.android.eroid.sample.injection.InjectManager;
 import com.zen.android.eroid.ui.DroidActivity;
+import com.zen.android.weather.protocol.WeatherApi;
 
 import javax.inject.Inject;
 
@@ -16,13 +15,13 @@ import javax.inject.Inject;
 public abstract class BaseActivity extends DroidActivity {
 
     @Inject
-    AppCenterApi mAppCenterApi;
+    WeatherApi mAppCenterApi;
 
     public BaseActivity() {
         InjectManager.getComponent().inject(this);
     }
 
-    public AppCenterApi getAppCenter() {
+    public WeatherApi getAppCenter() {
         return mAppCenterApi;
     }
 }

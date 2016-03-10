@@ -1,8 +1,7 @@
 package com.zen.android.eroid.sample.injection;
 
-import com.zen.android.center.sdk.AppCenter;
-import com.zen.android.center.sdk.AppCenterApi;
-import com.zen.android.center.sdk.protocol.ClientApi;
+import com.zen.android.weather.WeatherClient;
+import com.zen.android.weather.protocol.WeatherApi;
 
 import javax.inject.Singleton;
 
@@ -21,13 +20,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public AppCenterApi provideAppCenterApi(AppCenter center) {
-        return center.getApi();
+    public WeatherApi provideAppCenterApi() {
+        return WeatherClient.getWeatherApi();
     }
-
-    @Provides
-    @Singleton
-    public AppCenter provideAppCenter() {
-        return new AppCenter();
-    }
+//
+//    @Provides
+//    @Singleton
+//    public AppCenter provideAppCenter() {
+//        return new AppCenter();
+//    }
 }
