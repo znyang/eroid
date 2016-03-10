@@ -4,10 +4,8 @@ import com.zen.android.center.sdk.model.App;
 import com.zen.android.center.sdk.model.RowEntry;
 import com.zen.android.center.sdk.store.BaseCenterStore;
 
-import java.util.Collections;
 import java.util.List;
 
-import io.realm.RealmResults;
 import rx.Observable;
 
 /**
@@ -45,20 +43,12 @@ public class AppStore extends BaseCenterStore<List<App>> {
     }
 
     private void saveToDisk(List<App> data) {
-        getRealm().executeTransaction(realm -> realm.copyToRealmOrUpdate(data));
+
     }
 
     @SuppressWarnings("unchecked")
     private List<App> query() {
-        RealmResults<App> result = getRealm().where(App.class).findAll();
-        if (result.isEmpty()) {
-            return result;
-        }
-        if (result.size() <= mSkip) {
-            return Collections.EMPTY_LIST;
-        }
-        int end = Math.min(result.size(), mSkip + mLimit);
-        return result.subList(mSkip, end);
+        return null;
     }
 
 }

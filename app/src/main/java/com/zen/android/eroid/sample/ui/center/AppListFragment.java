@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * AppListFragment
@@ -55,7 +53,10 @@ public class AppListFragment extends BaseLayoutFragment {
         mPullToLoadView.setPullCallback(new PullCallback() {
             @Override
             public void onLoadMore() {
-
+                if (mListAdapter == null) {
+                    return;
+                }
+                doRefresh(mListAdapter.getItemCount());
             }
 
             @Override
@@ -78,18 +79,16 @@ public class AppListFragment extends BaseLayoutFragment {
 
 
     private void doRefresh(int currentCount) {
-        Subscription subscription = getAppCenter()
-                .getAppList(currentCount, PAGE_SIZE).first()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                            updateData(currentCount, result);
-                        },
+        getAppCenter()
+                .getAppList(currentCount, PAGE_SIZE).last()
+                .compose(async())
+                .subscribe(
+                        result -> updateData(currentCount, result),
                         throwable -> {
                             mPullToLoadView.setComplete();
                             showMessage(throwable.getMessage());
                         },
                         () -> mPullToLoadView.setComplete());
-        collect(subscription);
     }
 
     private void showMessage(CharSequence message) {
@@ -110,7 +109,13 @@ public class AppListFragment extends BaseLayoutFragment {
         if (target.size() < start) {
             return;
         }
-        target.remove(start);
+        if (start > 0) {
+            List<App> save = target.subList(0, start);
+            target.clear();
+            target.addAll(save);
+        } else if (target.size() > 0) {
+            target.clear();
+        }
         target.addAll(start, data);
 
         mListAdapter.setData(target);

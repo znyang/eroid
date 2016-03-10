@@ -2,11 +2,14 @@ package com.zen.android.eroid.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
+import com.zen.android.eroid.rx.lifecycle.ActivityEvent;
+import com.zen.android.eroid.rx.util.SchedulerCompat;
 import com.zen.android.eroid.injection.DroidComponentManager;
+import com.zen.android.eroid.rx.support.RxAppCompatActivity;
 import com.zen.android.eroid.ui.page.DroidPageDelegate;
 
+import rx.Observable;
 import rx.Subscription;
 
 /**
@@ -15,7 +18,7 @@ import rx.Subscription;
  * @author zeny
  * @version 2015.10.24
  */
-public class DroidActivity extends AppCompatActivity {
+public class DroidActivity extends RxAppCompatActivity {
 
     private DroidPageDelegate<DroidActivity> mDroidPageDelegate;
 
@@ -37,13 +40,9 @@ public class DroidActivity extends AppCompatActivity {
         return mDroidPageDelegate;
     }
 
-    public void collect(Subscription obs) {
-        getDroidPageDelegate().collect(obs);
+    public <T> Observable.Transformer<T, T> async() {
+        return obs -> obs.compose(bindUntilEvent(ActivityEvent.STOP))
+                .compose(SchedulerCompat.applyIoSchedulers());
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getDroidPageDelegate().unsubscribe();
-    }
 }
