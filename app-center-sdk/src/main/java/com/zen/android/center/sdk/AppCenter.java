@@ -20,10 +20,6 @@ public class AppCenter {
         CenterComponent.Instance.get().inject(this);
     }
 
-    public static void init() {
-        CenterComponent.Instance.init(DaggerProCenterComponent.builder().build());
-    }
-
     public static void recycle() {
     }
 
