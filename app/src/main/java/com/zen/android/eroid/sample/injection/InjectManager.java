@@ -18,6 +18,9 @@ public class InjectManager {
     }
 
     public static AppComponent getComponent() {
+        if (sComponent == null) {
+            sComponent = DaggerIProAppComponent.builder().build();
+        }
         return sComponent;
     }
 }

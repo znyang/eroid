@@ -16,9 +16,6 @@ public class SampleApp extends DroidApp {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        InjectManager.init(DaggerIProAppComponent.builder().build());
-        AppCenter.init();
     }
 
     @Override

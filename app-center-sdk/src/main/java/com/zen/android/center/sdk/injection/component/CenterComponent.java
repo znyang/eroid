@@ -17,6 +17,9 @@ public interface CenterComponent {
         }
 
         public static CenterComponent get() {
+            if (sComponent == null) {
+                sComponent = DaggerProCenterComponent.builder().build();
+            }
             return sComponent;
         }
     }
