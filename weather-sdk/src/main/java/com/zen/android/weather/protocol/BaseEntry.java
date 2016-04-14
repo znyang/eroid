@@ -1,6 +1,7 @@
 package com.zen.android.weather.protocol;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zen.android.weather.exception.WeatherException;
 
 /**
  * @author zen
@@ -16,6 +17,9 @@ public class BaseEntry<T> {
     private T      retData;
 
     public T getRetData() {
+        if (errNum != 0) {
+            throw new WeatherException(errMsg);
+        }
         return retData;
     }
 

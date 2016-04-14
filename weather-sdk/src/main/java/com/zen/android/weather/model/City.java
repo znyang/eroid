@@ -11,7 +11,7 @@ public class City {
     @JsonProperty("province_cn")
     private String mProvince;
     @JsonProperty("district_cn")
-    private String district_cn;
+    private String mDistrictCn;
     @JsonProperty("name_cn")
     private String mNameCn;
     @JsonProperty("name_en")
@@ -43,12 +43,12 @@ public class City {
         mNameCn = nameCn;
     }
 
-    public String getDistrict_cn() {
-        return district_cn;
+    public String getDistrictCn() {
+        return mDistrictCn;
     }
 
-    public void setDistrict_cn(String district_cn) {
-        this.district_cn = district_cn;
+    public void setDistrictCn(String districtCn) {
+        this.mDistrictCn = districtCn;
     }
 
     public String getProvince() {

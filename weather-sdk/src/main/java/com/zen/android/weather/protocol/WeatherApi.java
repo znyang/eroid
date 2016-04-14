@@ -17,7 +17,7 @@ import rx.Observable;
 public interface WeatherApi {
 
     @GET("/weatherservice/citylist")
-    Observable<BaseEntry<List<City>>> getCityList();
+    Observable<BaseEntry<List<City>>> getCityList(@Query("cityname") String cityName);
 
     /**
      * 历史七天天气

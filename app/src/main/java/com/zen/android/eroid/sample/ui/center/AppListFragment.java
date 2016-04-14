@@ -3,6 +3,7 @@ package com.zen.android.eroid.sample.ui.center;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,7 @@ public class AppListFragment extends BaseLayoutFragment {
 
 
     private void doRefresh(int currentCount) {
-        WeatherClient.getWeatherApi().getCityList()
+        WeatherClient.getWeatherApi().getCityList("福州")
                 .compose(async())
                 .map(BaseEntry::getRetData)
                 .subscribe(
