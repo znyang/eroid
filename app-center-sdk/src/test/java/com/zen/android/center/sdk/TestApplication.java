@@ -2,7 +2,6 @@ package com.zen.android.center.sdk;
 
 import android.app.Application;
 
-import com.zen.android.center.sdk.injection.DaggerTestCenterComponent;
 import com.zen.android.center.sdk.injection.component.CenterComponent;
 
 /**
@@ -17,7 +16,7 @@ public class TestApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        AppCenter.init();
-        CenterComponent.Instance.init(DaggerTestCenterComponent.builder().build());
+        CenterComponent.Instance.init(
+                com.zen.android.center.sdk.injection.DaggerTestCenterComponent.builder().build());
     }
 }
