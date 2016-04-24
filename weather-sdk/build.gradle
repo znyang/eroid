@@ -5,6 +5,17 @@ apply from: "${rootDir}/config/checkstyle/checkstyle.gradle"
 apply from: "${rootDir}/config/jacoco.gradle"
 apply from: "${rootDir}/config/retrolambda.gradle"
 
+android {
+    buildTypes {
+        debug {
+            buildConfigField "String", "WEATHER_APP_KEY", WEATHER_APP_KEY
+        }
+        release {
+            buildConfigField "String", "WEATHER_APP_KEY", WEATHER_APP_KEY
+        }
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile testLibs.junit

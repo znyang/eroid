@@ -51,6 +51,7 @@ public class AppListFragment extends BaseLayoutFragment {
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mListAdapter = new ListAdapter();
         mPullToLoadView.getRecyclerView().setAdapter(mListAdapter);
+        mPullToLoadView.setColorSchemeResources(R.color.colorPrimary);
 
         mPullToLoadView.isLoadMoreEnabled(true);
         mPullToLoadView.setPullCallback(new PullCallback() {
