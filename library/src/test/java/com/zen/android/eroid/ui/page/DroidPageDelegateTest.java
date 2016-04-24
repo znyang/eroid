@@ -58,8 +58,6 @@ public class DroidPageDelegateTest {
                 });
 //        subscription.unsubscribe();
         System.out.println("unsubscribe");
-        mPageDelegate.collect(subscription);
-        mPageDelegate.unsubscribe();
         latch.countDown();
         Thread.sleep(50);
         System.out.println("end");
