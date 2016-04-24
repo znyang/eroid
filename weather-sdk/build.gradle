@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: "${rootDir}/config/android.gradle"
-apply from: "${rootDir}/config/checkstyle/checkstyle.gradle"
+//apply from: "${rootDir}/config/checkstyle/checkstyle.gradle"
 apply from: "${rootDir}/config/jacoco.gradle"
 apply from: "${rootDir}/config/retrolambda.gradle"
 
