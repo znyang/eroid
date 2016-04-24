@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply from: "${rootDir}/config/android.gradle"
+//apply from: "${rootDir}/config/checkstyle/checkstyle.gradle"
+apply from: "${rootDir}/config/jacoco.gradle"
+apply from: "${rootDir}/config/retrolambda.gradle"
+
+android {
+    buildTypes {
+        debug {
+            buildConfigField "String", "WEATHER_APP_KEY", WEATHER_APP_KEY
+        }
+        release {
+            buildConfigField "String", "WEATHER_APP_KEY", WEATHER_APP_KEY
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile testLibs.junit
+
+    apt libs.daggerCompiler
+    compile libs.dagger
+    compile libs.appCompat
+    compile libs.rxAndroid
+    compile libs.retrofitWithJackson
+
+    provided libs.supportAnnotation
+
+    testCompile testLibs.junit
+    testCompile testLibs.mockito
+    testCompile testLibs.robolectric
+    testCompile libs.dagger
+    testApt libs.daggerCompiler
+}

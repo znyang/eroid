@@ -1,6 +1,7 @@
 package com.zen.android.center.sdk.injection;
 
 import com.zen.android.center.sdk.injection.component.CenterComponent;
+import com.zen.android.center.sdk.injection.module.AppCenterModule;
 
 import javax.inject.Singleton;
 
@@ -14,8 +15,9 @@ import dagger.Component;
  */
 @Singleton
 @Component(modules = {
-        TestDataClientModule.class
+        TestDataClientModule.class,
+        AppCenterModule.class
 })
-public interface TestCenterComponent extends CenterComponent{
+public interface TestCenterComponent extends CenterComponent {
 
 }

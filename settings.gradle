@@ -1,1 +1,1 @@
-include ':app', ':library', ':app-center-sdk'
+include ':app', ':library', ':app-center-sdk', ':weather-sdk'

@@ -1,9 +1,6 @@
 package com.zen.android.eroid.sample;
 
-import com.zen.android.center.sdk.AppCenter;
 import com.zen.android.eroid.DroidApp;
-import com.zen.android.eroid.sample.injection.DaggerIProAppComponent;
-import com.zen.android.eroid.sample.injection.InjectManager;
 
 /**
  * SampleApp
@@ -21,6 +18,5 @@ public class SampleApp extends DroidApp {
     @Override
     protected void beforeExit() {
         super.beforeExit();
-        AppCenter.recycle();
     }
 }

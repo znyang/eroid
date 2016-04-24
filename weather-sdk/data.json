@@ -1,0 +1,68 @@
+{
+  "weatherDetail": {
+    "city": "北京",
+    "cityid": "101010100",
+    "today": {
+      "date": "2015-08-03",
+      "week": "星期一",
+      "curTemp": "28℃",
+      "aqi": "92",
+      "fengxiang": "无持续风向",
+      "fengli": "微风级",
+      "hightemp": "30℃",
+      "lowtemp": "23℃",
+      "type": "阵雨",
+      "index": [
+        {
+          "name": "感冒指数",
+          "code": "gm",
+          "index": "",
+          "details": "各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。",
+          "otherName": ""
+        }
+      ]
+    },
+    "forecast": [
+      {
+        "date": "2015-08-04",
+        "week": "星期二",
+        "fengxiang": "无持续风向",
+        "fengli": "微风级",
+        "hightemp": "32℃",
+        "lowtemp": "23℃",
+        "type": "多云"
+      }
+    ],
+    "history": [
+      {
+        "date": "2015-07-31",
+        "week": "星期五",
+        "aqi": "52",
+        "fengxiang": "无持续风向",
+        "fengli": "微风级",
+        "hightemp": "高温 29℃",
+        "lowtemp": "低温 22℃",
+        "type": "多云"
+      }
+    ]
+  },
+  "w": {
+    "city": "北京",
+    "pinyin": "beijing",
+    "citycode": "101010100",
+    "date": "15-02-11",
+    "time": "11:00",
+    "postCode": "100000",
+    "longitude": 116.391,
+    "latitude": 39.904,
+    "altitude": "33",
+    "weather": "晴",
+    "temp": "10",
+    "l_tmp": "-4",
+    "h_tmp": "10",
+    "WD": "无持续风向",
+    "WS": "微风(<10m/h)",
+    "sunrise": "07:12",
+    "sunset": "17:44"
+  }
+}

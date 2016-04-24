@@ -5,6 +5,7 @@ import com.zen.android.center.sdk.model.App;
 import com.zen.android.center.sdk.model.UserSession;
 import com.zen.android.center.sdk.store.app.AppStore;
 import com.zen.android.center.sdk.store.user.UserLoginStore;
+import com.zen.android.center.sdk.store.user.UserRegisterStore;
 import com.zen.android.eroid.base.ContextUtil;
 
 import java.util.List;
@@ -45,7 +46,10 @@ public class AppCenterModule {
 
             @Override
             public Observable<Boolean> register(String username, String password) {
-                return null;
+                return new UserRegisterStore(username, password)
+                        .concat()
+                        .doOnNext(session -> mLoginSession = session)
+                        .map(session -> session.getSessionToken() != null);
             }
 
             @Override
