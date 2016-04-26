@@ -1,5 +1,7 @@
 # eroid
 
+[![Build Status](https://travis-ci.org/znyang/eroid.svg?branch=master)](https://travis-ci.org/znyang/eroid)
+
 ## REQUIRES
 
 * Dagger2
